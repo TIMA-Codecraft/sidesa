@@ -26,56 +26,29 @@
     }
 </style>
 
-<!-- Banner Hero Hijau Zamrud (Jumbotron Peta Web GIS Tema Emerald) -->
-<section class="relative px-4 sm:px-6 lg:px-8 pt-6 pb-4">
-    <div class="max-w-7xl mx-auto">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-emerald-950/20 bg-gradient-to-br from-emerald-950 via-emerald-900 to-teal-950 py-12 sm:py-16 px-6 sm:px-12 text-white">
-            <!-- Background Landscape Overlay -->
-            <div class="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80');"></div>
-            <!-- Radial Glow Ornaments -->
-            <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -left-10 -top-10 w-72 h-72 bg-teal-300/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="relative z-10 max-w-4xl space-y-4">
-                <!-- Breadcrumbs Cerah Kontras Tinggi -->
-                <nav class="flex flex-wrap items-center gap-2 text-xs text-emerald-300 font-medium">
-                    <a href="/" class="hover:text-white transition flex items-center gap-1">
-                        <span>🏡</span>
-                        <span>Beranda</span>
-                    </a>
-                    <span class="text-emerald-500">/</span>
-                    <span class="text-white font-semibold">Peta Digital & Wilayah GIS</span>
-                </nav>
-
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 text-xs font-bold backdrop-blur-md">
-                    <span>🗺️</span>
-                    <span>Sistem Informasi Geografis (Web GIS) & Inventarisasi Aset (Permendagri 1/2016)</span>
-                </div>
-
-                <!-- Judul Halaman Putih Kontras Tinggi -->
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-sm">
-                    Peta Digital & Fasilitas Desa
-                </h1>
-
-                <p class="text-sm sm:text-base lg:text-lg text-emerald-100/90 leading-relaxed font-normal max-w-3xl">
-                    Eksplorasi batas administratif wilayah, pembagian zonasi dusun/RW, persebaran titik fasilitas publik, serta kepemilikan yuridis aset desa di {{ \App\Models\Setting::get('village_name', 'Desa Sukamaju') }}.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+@component('themes.emerald.partials.page-hero', [
+    'breadcrumbs' => [
+        ['label' => 'Beranda', 'url' => route('home'), 'icon' => '🏡'],
+        ['label' => 'Peta Digital & Wilayah GIS'],
+    ],
+    'eyebrow' => 'Sistem Informasi Geografis (Web GIS) & Inventarisasi Aset (Permendagri 1/2016)',
+    'eyebrowIcon' => '🗺️',
+    'title' => 'Peta Digital & Fasilitas Desa',
+    'description' => 'Eksplorasi batas administratif wilayah, pembagian zonasi dusun/RW, persebaran titik fasilitas publik, serta kepemilikan yuridis aset desa di ' . \App\Models\Setting::get('village_name', 'Desa Sukamaju') . '.',
+])
+@endcomponent
 
 <!-- Filter & Map Container -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
     <!-- Category & Asset Filter Bar -->
-    <div class="space-y-3 bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+    <div class="space-y-3 bg-white p-4 rounded-3xl border border-slate-200 shadow-sm">
         <!-- Filter Kategori Fasilitas -->
         <div class="flex items-center space-x-2 overflow-x-auto pb-1 scrollbar-none" id="categoryFilters">
             <button 
                 type="button" 
                 onclick="filterCategory('all')" 
                 id="btn-cat-all"
-                class="filter-cat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap bg-emerald-600 text-white shadow-xs"
+                class="filter-cat-btn active px-3.5 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-emerald-600 text-white shadow-sm"
             >
                 🌐 Semua Kategori ({{ $facilities->count() }})
             </button>
@@ -88,7 +61,7 @@
                         type="button" 
                         onclick="filterCategory('{{ $key }}')" 
                         id="btn-cat-{{ $key }}"
-                        class="filter-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
+                        class="filter-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
                     >
                         <span>{{ $cat['icon'] }}</span>
                         <span class="ml-1">{{ $cat['label'] }} ({{ $count }})</span>
@@ -107,7 +80,7 @@
                 type="button" 
                 onclick="filterAsset('all')" 
                 id="btn-asset-all"
-                class="filter-asset-btn active px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-emerald-700 text-white shadow-2xs"
+                class="filter-asset-btn active px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-emerald-700 text-white shadow-sm"
             >
                 Semua Titik
             </button>
@@ -115,7 +88,7 @@
                 type="button" 
                 onclick="filterAsset('only_assets')" 
                 id="btn-asset-only_assets"
-                class="filter-asset-btn px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
+                class="filter-asset-btn px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
             >
                 🏛️ Hanya Aset Desa ({{ $facilities->where('is_village_asset', true)->count() }})
             </button>
@@ -128,7 +101,7 @@
                         type="button" 
                         onclick="filterAsset('{{ $kCode }}')" 
                         id="btn-asset-{{ $kCode }}"
-                        class="filter-asset-btn px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
+                        class="filter-asset-btn px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
                     >
                         <span>{{ $kib['icon'] }}</span>
                         <span class="ml-1">{{ $kib['code'] }}: {{ $kib['name'] }} ({{ $kCount }})</span>
@@ -195,7 +168,7 @@
                                 @if($facility->is_village_asset && ($facility->kib_meta || $facility->ownership_meta))
                                     <div class="mt-1 flex items-center gap-1.5 flex-wrap text-[10px]">
                                         @if($facility->kib_meta)
-                                            <span class="px-1.5 py-0.5 rounded font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+                                            <span class="px-1.5 py-0.5 rounded font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                                                 {{ $facility->kib_meta['code'] }}
                                             </span>
                                         @endif
@@ -220,9 +193,11 @@
                             </div>
                         </div>
                     @empty
-                        <div class="p-8 text-center text-slate-400">
-                            <p class="text-xs">Belum ada titik fasilitas yang tersimpan.</p>
-                        </div>
+                        @include('themes.emerald.partials.empty-state', [
+                            'icon' => '📍',
+                            'title' => 'Belum ada titik fasilitas yang tersimpan.',
+                            'compact' => true,
+                        ])
                     @endforelse
                 </div>
             </div>
@@ -361,11 +336,11 @@
         currentCategoryFilter = category;
 
         document.querySelectorAll('.filter-cat-btn').forEach(btn => {
-            btn.className = 'filter-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200';
+            btn.className = 'filter-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200';
         });
         const activeBtn = document.getElementById('btn-cat-' + category);
         if (activeBtn) {
-            activeBtn.className = 'filter-cat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap bg-emerald-600 text-white shadow-xs';
+            activeBtn.className = 'filter-cat-btn active px-3.5 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-emerald-600 text-white shadow-sm';
         }
 
         applyCombinedFilters();
@@ -376,11 +351,11 @@
         currentAssetFilter = assetFilter;
 
         document.querySelectorAll('.filter-asset-btn').forEach(btn => {
-            btn.className = 'filter-asset-btn px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200';
+            btn.className = 'filter-asset-btn px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200';
         });
         const activeBtn = document.getElementById('btn-asset-' + assetFilter);
         if (activeBtn) {
-            activeBtn.className = 'filter-asset-btn active px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-emerald-700 text-white shadow-2xs';
+            activeBtn.className = 'filter-asset-btn active px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-emerald-700 text-white shadow-sm';
         }
 
         applyCombinedFilters();

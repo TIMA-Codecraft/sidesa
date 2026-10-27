@@ -3,69 +3,39 @@
 @section('title', 'Transparansi APBDes ' . ($selectedYear ?? date('Y')) . ' - ' . \App\Models\Setting::get('village_name', 'Desa Sukamaju'))
 
 @section('content')
-<!-- Banner Hero Hijau Zamrud (Jumbotron APBDes Tema Emerald) -->
-<section class="relative px-4 sm:px-6 lg:px-8 pt-6 pb-4">
-    <div class="max-w-7xl mx-auto">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-emerald-950/20 bg-gradient-to-br from-emerald-950 via-emerald-900 to-teal-950 py-12 sm:py-16 px-6 sm:px-12 text-white">
-            <!-- Background Landscape Overlay -->
-            <div class="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80');"></div>
-            <!-- Radial Glow Ornaments -->
-            <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -left-10 -top-10 w-72 h-72 bg-teal-300/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="relative z-10 max-w-4xl space-y-4">
-                <!-- Breadcrumbs Cerah Kontras Tinggi -->
-                <nav class="flex flex-wrap items-center gap-2 text-xs text-emerald-300 font-medium">
-                    <a href="/" class="hover:text-white transition flex items-center gap-1">
-                        <span>🏡</span>
-                        <span>Beranda</span>
-                    </a>
-                    <span class="text-emerald-500">/</span>
-                    <span class="text-white font-semibold">Transparansi APBDes</span>
-                    <span class="text-emerald-500">/</span>
-                    <span class="text-emerald-300 font-bold">Tahun {{ $selectedYear }}</span>
-                </nav>
-
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 text-xs font-bold backdrop-blur-md">
-                    <span>📊</span>
-                    <span>Akuntabilitas & Tata Kelola Keuangan Desa</span>
-                </div>
-
-                <!-- Judul Halaman Putih Kontras Tinggi -->
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-sm">
-                    Transparansi APBDes {{ $selectedYear }}
-                </h1>
-
-                <p class="text-sm sm:text-base lg:text-lg text-emerald-100/90 leading-relaxed font-normal max-w-3xl">
-                    Publikasi resmi Anggaran Pendapatan dan Belanja Desa (APBDes) {{ \App\Models\Setting::get('village_name', 'Desa Sukamaju') }} sebagai wujud keterbukaan informasi publik dan akuntabilitas pengelolaan dana desa.
-                </p>
-
-                <!-- Selector Tahun Anggaran Emerald -->
-                @if($budgets->count() > 1)
-                    <div class="pt-2 flex flex-wrap items-center gap-2">
-                        <span class="text-xs text-emerald-300 font-semibold mr-1">Tahun Anggaran:</span>
-                        @foreach($budgets as $b)
-                            <a 
-                                href="{{ route('budgets.index', ['year' => $b->year]) }}" 
-                                class="px-4 py-2 rounded-xl text-xs font-bold transition {{ $b->year === $selectedYear ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-md' : 'bg-white/10 text-white hover:bg-white/20 border border-white/20 backdrop-blur-md' }}"
-                            >
-                                Tahun {{ $b->year }}
-                            </a>
-                        @endforeach
-                    </div>
-                @endif
-            </div>
+@component('themes.emerald.partials.page-hero', [
+    'breadcrumbs' => [
+        ['label' => 'Beranda', 'url' => route('home'), 'icon' => '🏡'],
+        ['label' => 'Transparansi APBDes'],
+        ['label' => 'Tahun ' . $selectedYear, 'muted' => true],
+    ],
+    'eyebrow' => 'Akuntabilitas & Tata Kelola Keuangan Desa',
+    'eyebrowIcon' => '📊',
+    'title' => 'Transparansi APBDes ' . $selectedYear,
+    'description' => 'Publikasi resmi Anggaran Pendapatan dan Belanja Desa (APBDes) ' . \App\Models\Setting::get('village_name', 'Desa Sukamaju') . ' sebagai wujud keterbukaan informasi publik dan akuntabilitas pengelolaan dana desa.',
+])
+    @if($budgets->count() > 1)
+        <div class="pt-2 flex flex-wrap items-center gap-2">
+            <span class="text-xs text-emerald-300 font-semibold mr-1">Tahun Anggaran:</span>
+            @foreach($budgets as $b)
+                <a
+                    href="{{ route('budgets.index', ['year' => $b->year]) }}"
+                    class="px-4 py-2 rounded-xl text-xs font-bold transition {{ $b->year === $selectedYear ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-md' : 'bg-white/10 text-white hover:bg-white/20 border border-white/20 backdrop-blur-md' }}"
+                >
+                    Tahun {{ $b->year }}
+                </a>
+            @endforeach
         </div>
-    </div>
-</section>
+    @endif
+@endcomponent
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
     @if(!$budget)
-        <div class="p-16 text-center text-slate-400 bg-white rounded-3xl border border-dashed border-slate-200">
-            <div class="text-5xl mb-3">📈</div>
-            <h3 class="text-base font-bold text-slate-700">Data APBDes Belum Tersedia</h3>
-            <p class="text-xs text-slate-400 mt-1">Data anggaran pendapatan dan belanja desa untuk tahun {{ $selectedYear }} belum dipublikasikan.</p>
-        </div>
+        @include('themes.emerald.partials.empty-state', [
+            'icon' => '📈',
+            'title' => 'Data APBDes Belum Tersedia',
+            'description' => 'Data anggaran pendapatan dan belanja desa untuk tahun ' . $selectedYear . ' belum dipublikasikan.',
+        ])
     @else
         <!-- Ringkasan 4 Kartu Utama -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -102,8 +72,8 @@
             <!-- Pembiayaan Neto -->
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Pembiayaan Neto</span>
-                    <span class="p-2 bg-blue-50 text-blue-600 rounded-xl text-sm">⚖️</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600">Pembiayaan Neto</span>
+                    <span class="p-2 bg-teal-50 text-teal-600 rounded-xl text-sm">⚖️</span>
                 </div>
                 <div class="text-xl font-black text-slate-800">
                     Rp {{ number_format($budget->net_financing_realized, 0, ',', '.') }}
@@ -272,7 +242,7 @@
 
             <!-- 3. Tabel Pembiayaan Desa (Restrukturisasi Permendagri No. 20/2018) -->
             <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
-                <div class="p-6 bg-gradient-to-r from-blue-50 to-white border-b border-slate-200 flex items-center justify-between">
+                <div class="p-6 bg-gradient-to-r from-teal-50 to-white border-b border-slate-200 flex items-center justify-between">
                     <div>
                         <h3 class="font-bold text-slate-800 text-base flex items-center space-x-2">
                             <span>3.</span>
@@ -280,7 +250,7 @@
                         </h3>
                         <p class="text-xs text-slate-500 mt-0.5">Penerimaan SiLPA tahun lalu vs pengeluaran penyertaan modal BUMDes & dana cadangan.</p>
                     </div>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-teal-100 text-teal-800">
                         Netto: Rp {{ number_format($budget->net_financing_realized, 0, ',', '.') }}
                     </span>
                 </div>
@@ -331,11 +301,11 @@
                 </div>
 
                 <!-- 3.2 Pengeluaran Pembiayaan -->
-                <div class="p-4 bg-purple-50/60 border-t border-b border-slate-100 flex items-center justify-between text-xs">
-                    <span class="font-bold text-purple-950 uppercase tracking-wider">
+                <div class="p-4 bg-slate-100/60 border-t border-b border-slate-100 flex items-center justify-between text-xs">
+                    <span class="font-bold text-slate-900 uppercase tracking-wider">
                         3.2 Pengeluaran Pembiayaan (Akun 6.2 - Penyertaan Modal BUMDes dll)
                     </span>
-                    <span class="font-bold font-mono text-purple-800">
+                    <span class="font-bold font-mono text-slate-800">
                         Realisasi: Rp {{ number_format($budget->total_realized_financing_expenditure, 0, ',', '.') }}
                     </span>
                 </div>
@@ -359,9 +329,9 @@
                                         @endif
                                     </td>
                                     <td class="py-3 px-6 text-right font-mono">{{ number_format($fin->budgeted_amount, 0, ',', '.') }}</td>
-                                    <td class="py-3 px-6 text-right font-mono font-bold text-purple-700">{{ number_format($fin->realized_amount, 0, ',', '.') }}</td>
+                                    <td class="py-3 px-6 text-right font-mono font-bold text-slate-800">{{ number_format($fin->realized_amount, 0, ',', '.') }}</td>
                                     <td class="py-3 px-6 text-center font-bold">
-                                        <span class="px-2 py-0.5 rounded-full text-[11px] bg-purple-50 text-purple-800">
+                                        <span class="px-2 py-0.5 rounded-full text-[11px] bg-slate-100 text-slate-700">
                                             {{ $fin->realization_percentage }}%
                                         </span>
                                     </td>
@@ -379,7 +349,7 @@
                 <div class="p-6 bg-slate-50 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                     <div class="p-4 bg-white rounded-2xl border border-slate-200 space-y-1">
                         <span class="font-bold text-slate-600 block uppercase tracking-wider text-[11px]">Pembiayaan Netto (6.1 - 6.2)</span>
-                        <div class="text-base font-black text-blue-700">
+                        <div class="text-base font-black text-teal-700">
                             Rp {{ number_format($budget->net_financing_realized, 0, ',', '.') }}
                         </div>
                         <span class="text-[11px] text-slate-400 block">Target Anggaran: Rp {{ number_format($budget->net_financing_budgeted, 0, ',', '.') }}</span>

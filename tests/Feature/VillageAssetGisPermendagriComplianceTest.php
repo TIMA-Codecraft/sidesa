@@ -234,7 +234,7 @@ class VillageAssetGisPermendagriComplianceTest extends TestCase
 
         $response = $this->get('/peta');
         $response->assertStatus(200);
-        $response->assertSee('Peta Digital & Fasilitas Desa', false);
+        $response->assertSee('Peta Digital & Fasilitas Desa');
         $response->assertSee('Inventarisasi Aset (Permendagri 1/2016)');
         $response->assertSee('Hanya Aset Desa');
         $response->assertSee('KIB A: Tanah');

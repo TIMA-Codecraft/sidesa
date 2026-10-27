@@ -32,10 +32,10 @@
             <div class="space-y-3">
                 <h5 class="text-xs font-bold text-white uppercase tracking-wider text-emerald-400">Layanan Warga</h5>
                 <ul class="text-xs text-emerald-200/80 space-y-2">
-                    <li><a href="/citizen/letters/create" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Pengajuan Surat Keterangan Usaha (SKU)</a></li>
-                    <li><a href="/citizen/letters/create" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Surat Keterangan Domisili</a></li>
-                    <li><a href="/citizen/letters/create" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Surat Keterangan Tidak Mampu (SKTM)</a></li>
-                    <li><a href="/citizen/letters/create" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Pelayanan Kependudukan & Mutasi</a></li>
+                    <li><a href="{{ route('citizen.letters.create') }}" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Pengajuan Surat Keterangan Usaha (SKU)</a></li>
+                    <li><a href="{{ route('citizen.letters.create') }}" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Surat Keterangan Domisili</a></li>
+                    <li><a href="{{ route('citizen.letters.create') }}" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Surat Keterangan Tidak Mampu (SKTM)</a></li>
+                    <li><a href="{{ route('citizen.letters.create') }}" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Pelayanan Kependudukan & Mutasi</a></li>
                 </ul>
             </div>
 
@@ -43,10 +43,10 @@
             <div class="space-y-3">
                 <h5 class="text-xs font-bold text-white uppercase tracking-wider text-emerald-400">PPID & Akuntabilitas</h5>
                 <ul class="text-xs text-emerald-200/80 space-y-2">
-                    <li><a href="/ppid" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Profil & Maklumat Pelayanan PPID</a></li>
-                    <li><a href="/ppid/dokumen" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Repositori Dokumen Publik (DIP)</a></li>
-                    <li><a href="/ppid/permohonan" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Permohonan Informasi Daring</a></li>
-                    <li><a href="/apbdes" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Laporan Realisasi APBDes Transparan</a></li>
+                    <li><a href="{{ route('public.ppid.index') }}" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Profil & Maklumat Pelayanan PPID</a></li>
+                    <li><a href="{{ route('public.ppid.documents') }}" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Repositori Dokumen Publik (DIP)</a></li>
+                    <li><a href="{{ route('public.ppid.requests.create') }}" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Permohonan Informasi Daring</a></li>
+                    <li><a href="{{ route('budgets.index') }}" class="hover:text-emerald-300 transition flex items-center gap-1.5">&bull; Laporan Realisasi APBDes Transparan</a></li>
                 </ul>
             </div>
 

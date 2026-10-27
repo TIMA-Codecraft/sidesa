@@ -30,14 +30,14 @@ class ThemeSettingController extends Controller
                 'name' => 'Default (Klasik SiDesa)',
                 'description' => 'Tema resmi bawaan SiDesa dengan palet biru langit cerah, navigasi lengkap, dan tata letak responsif.',
                 'author' => 'SiDesa Core Team',
-                'version' => '1.0.0',
+                'version' => '1.1.0',
                 'screenshot' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
             ],
             'emerald' => [
                 'name' => 'Emerald Nature',
                 'description' => 'Tema bertema alam bernuansa hijau zamrud asri, cocok untuk desa agrowisata dan pedesaan hijau.',
                 'author' => 'SiDesa Community',
-                'version' => '1.0.0',
+                'version' => '1.1.0',
                 'screenshot' => 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
             ],
         ];
