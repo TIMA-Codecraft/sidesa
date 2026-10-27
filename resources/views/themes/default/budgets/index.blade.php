@@ -3,49 +3,39 @@
 @section('title', 'Transparansi APBDes ' . ($selectedYear ?? date('Y')) . ' - ' . \App\Models\Setting::get('village_name', 'Desa Sukamaju'))
 
 @section('content')
-<!-- Header Banner -->
-<section class="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 mb-3 space-x-1.5">
-            <span>📊</span>
-            <span>Akuntabilitas & Transparansi Publik</span>
-        </span>
-        <h1 class="text-3xl sm:text-4xl font-black tracking-tight">
-            Transparansi APBDes {{ $selectedYear }}
-        </h1>
-        <p class="mt-2 text-sm sm:text-base text-emerald-100 max-w-2xl leading-relaxed">
-            Publikasi resmi Anggaran Pendapatan dan Belanja Desa (APBDes) {{ \App\Models\Setting::get('village_name', 'Desa Sukamaju') }} sebagai wujud keterbukaan informasi dan tata kelola keuangan desa yang akuntabel.
-        </p>
-
-        <!-- Selector Tahun Anggaran -->
-        @if($budgets->count() > 1)
-            <div class="mt-6 flex flex-wrap items-center gap-2">
-                <span class="text-xs text-emerald-200 font-semibold mr-2">Pilih Tahun:</span>
-                @foreach($budgets as $b)
-                    <a 
-                        href="{{ route('budgets.index', ['year' => $b->year]) }}" 
-                        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition {{ $b->year === $selectedYear ? 'bg-white text-emerald-900 shadow-sm' : 'bg-emerald-800/60 text-emerald-100 hover:bg-emerald-700/60 border border-emerald-600/40' }}"
-                    >
-                        Tahun {{ $b->year }}
-                    </a>
-                @endforeach
-            </div>
-        @endif
-    </div>
-</section>
+@component('themes.default.partials.page-hero', [
+    'eyebrow' => 'Akuntabilitas & Transparansi Publik',
+    'eyebrowIcon' => '📊',
+    'title' => 'Transparansi APBDes ' . $selectedYear,
+    'description' => 'Publikasi resmi Anggaran Pendapatan dan Belanja Desa (APBDes) ' . \App\Models\Setting::get('village_name', 'Desa Sukamaju') . ' sebagai wujud keterbukaan informasi dan tata kelola keuangan desa yang akuntabel.',
+])
+    @if($budgets->count() > 1)
+        <div class="mt-6 flex flex-wrap items-center gap-2">
+            <span class="text-xs text-sky-200 font-semibold mr-2">Pilih Tahun:</span>
+            @foreach($budgets as $b)
+                <a
+                    href="{{ route('budgets.index', ['year' => $b->year]) }}"
+                    class="px-3.5 py-1.5 rounded-full text-xs font-bold transition {{ $b->year === $selectedYear ? 'bg-white text-sky-900 shadow-sm' : 'bg-white/10 text-white hover:bg-white/20 border border-white/20' }}"
+                >
+                    Tahun {{ $b->year }}
+                </a>
+            @endforeach
+        </div>
+    @endif
+@endcomponent
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
     @if(!$budget)
-        <div class="p-16 text-center text-slate-400 bg-white rounded-3xl border border-dashed border-slate-200">
-            <div class="text-5xl mb-3">📈</div>
-            <h3 class="text-base font-bold text-slate-700">Data APBDes Belum Tersedia</h3>
-            <p class="text-xs text-slate-400 mt-1">Data anggaran pendapatan dan belanja desa untuk tahun {{ $selectedYear }} belum dipublikasikan.</p>
-        </div>
+        @include('themes.default.partials.empty-state', [
+            'icon' => '📈',
+            'title' => 'Data APBDes Belum Tersedia',
+            'description' => 'Data anggaran pendapatan dan belanja desa untuk tahun ' . $selectedYear . ' belum dipublikasikan.',
+        ])
     @else
         <!-- Ringkasan 4 Kartu Utama -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Pendapatan -->
-            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Pendapatan Desa</span>
                     <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl text-sm">💰</span>
@@ -60,7 +50,7 @@
             </div>
 
             <!-- Belanja -->
-            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Belanja Desa</span>
                     <span class="p-2 bg-rose-50 text-rose-600 rounded-xl text-sm">🛒</span>
@@ -75,7 +65,7 @@
             </div>
 
             <!-- Pembiayaan Neto -->
-            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Pembiayaan Neto</span>
                     <span class="p-2 bg-blue-50 text-blue-600 rounded-xl text-sm">⚖️</span>
@@ -93,7 +83,7 @@
             @php
                 $silpaRealized = $budget->silpa_realized;
             @endphp
-            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase tracking-wider text-slate-600">SiLPA Berkenaan</span>
                     <span class="p-2 bg-slate-100 text-slate-600 rounded-xl text-sm">📊</span>
@@ -110,7 +100,7 @@
         <!-- Visualisasi Grafik Interaktif Chart.js -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Grafik Bar: Realisasi vs Anggaran -->
-            <div class="lg:col-span-2 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+            <div class="lg:col-span-2 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
                 <div>
                     <h3 class="font-bold text-slate-800 text-base">Capaian Realisasi vs Target Anggaran</h3>
                     <p class="text-xs text-slate-500 mt-0.5">Perbandingan total pendapatan desa dan realisasi belanja dalam Rupiah.</p>
@@ -121,7 +111,7 @@
             </div>
 
             <!-- Grafik Donut: Komposisi Belanja Desa (5 Bidang Baku) -->
-            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
                 <div>
                     <h3 class="font-bold text-slate-800 text-base">Komposisi 5 Bidang Belanja</h3>
                     <p class="text-xs text-slate-500 mt-0.5">Proporsi alokasi belanja terstandar Permendagri No. 20/2018.</p>
@@ -136,7 +126,7 @@
         <!-- Rincian Tabel Transparansi APBDes -->
         <div class="space-y-8">
             <!-- 1. Tabel Pendapatan Desa -->
-            <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                 <div class="p-6 bg-gradient-to-r from-emerald-50 to-white border-b border-slate-200 flex items-center justify-between">
                     <div>
                         <h3 class="font-bold text-slate-800 text-base flex items-center space-x-2">
@@ -187,7 +177,7 @@
             </div>
 
             <!-- 2. Tabel Belanja Desa (5 Bidang Baku Permendagri No. 20/2018) -->
-            <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                 <div class="p-6 bg-gradient-to-r from-rose-50 to-white border-b border-slate-200 flex items-center justify-between">
                     <div>
                         <h3 class="font-bold text-slate-800 text-base flex items-center space-x-2">
@@ -246,7 +236,7 @@
             </div>
 
             <!-- 3. Tabel Pembiayaan Desa (Restrukturisasi Permendagri No. 20/2018) -->
-            <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                 <div class="p-6 bg-gradient-to-r from-blue-50 to-white border-b border-slate-200 flex items-center justify-between">
                     <div>
                         <h3 class="font-bold text-slate-800 text-base flex items-center space-x-2">

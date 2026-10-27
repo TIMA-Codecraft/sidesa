@@ -5,12 +5,14 @@
 @section('content')
 <!-- Breadcrumbs -->
 <div class="bg-slate-100 border-b border-slate-200 py-3.5 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto flex items-center space-x-2 text-xs text-slate-500 overflow-x-auto">
-        <a href="{{ route('home') }}" class="hover:text-sky-600 transition">Beranda</a>
-        <span>/</span>
-        <a href="{{ route('articles.index') }}" class="hover:text-sky-600 transition">Kabar Desa</a>
-        <span>/</span>
-        <span class="text-slate-800 font-medium truncate">{{ $article->title }}</span>
+    <div class="max-w-4xl mx-auto">
+        @include('themes.default.partials.breadcrumbs', [
+            'items' => [
+                ['label' => 'Beranda', 'url' => route('home')],
+                ['label' => 'Kabar Desa', 'url' => route('articles.index')],
+                ['label' => $article->title],
+            ],
+        ])
     </div>
 </div>
 
