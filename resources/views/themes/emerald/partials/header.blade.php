@@ -12,11 +12,11 @@
             </span>
         </div>
         <div class="flex items-center space-x-3 text-[11px]">
-            <a href="/ppid" class="hover:text-white transition font-medium">PPID Desa</a>
+            <a href="{{ route('public.ppid.index') }}" class="hover:text-white transition font-medium">PPID Desa</a>
             <span class="text-emerald-400/40">&bull;</span>
-            <a href="/apbdes" class="hover:text-white transition font-medium">Transparansi APBDes</a>
+            <a href="{{ route('budgets.index') }}" class="hover:text-white transition font-medium">Transparansi APBDes</a>
             <span class="text-emerald-400/40">&bull;</span>
-            <a href="/peta" class="hover:text-white transition font-medium">Peta GIS</a>
+            <a href="{{ route('map.index') }}" class="hover:text-white transition font-medium">Peta GIS</a>
         </div>
     </div>
 </div>
@@ -84,10 +84,10 @@
                     @endif
                 @empty
                     <a href="{{ route('home') }}" class="px-3 py-2 rounded-xl text-xs font-semibold text-emerald-700 bg-emerald-50">Beranda</a>
-                    <a href="/berita" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60">Kabar Desa</a>
-                    <a href="/apbdes" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60">APBDes</a>
-                    <a href="/peta" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60">Peta GIS</a>
-                    <a href="/ppid" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60">PPID Desa</a>
+                    <a href="{{ route('articles.index') }}" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60">Kabar Desa</a>
+                    <a href="{{ route('budgets.index') }}" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60">APBDes</a>
+                    <a href="{{ route('map.index') }}" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60">Peta GIS</a>
+                    <a href="{{ route('public.ppid.index') }}" class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60">PPID Desa</a>
                 @endforelse
             </nav>
 
@@ -142,8 +142,8 @@
                 @endforeach
             @empty
                 <a href="{{ route('home') }}" class="block px-3 py-2 rounded-xl text-xs font-semibold text-emerald-700">Beranda</a>
-                <a href="/berita" class="block px-3 py-2 rounded-xl text-xs font-semibold text-slate-700">Kabar Desa</a>
-                <a href="/apbdes" class="block px-3 py-2 rounded-xl text-xs font-semibold text-slate-700">APBDes</a>
+                <a href="{{ route('articles.index') }}" class="block px-3 py-2 rounded-xl text-xs font-semibold text-slate-700">Kabar Desa</a>
+                <a href="{{ route('budgets.index') }}" class="block px-3 py-2 rounded-xl text-xs font-semibold text-slate-700">APBDes</a>
             @endforelse
         </div>
     </div>

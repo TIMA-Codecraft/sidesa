@@ -28,7 +28,7 @@
                     </p>
 
                     <!-- Pencarian Berita & Layanan Cepat -->
-                    <form action="/berita" method="GET" class="max-w-lg bg-white/10 backdrop-blur-md border border-white/20 p-1.5 rounded-2xl flex items-center gap-2 shadow-inner">
+                    <form action="{{ route('articles.index') }}" method="GET" class="max-w-lg bg-white/10 backdrop-blur-md border border-white/20 p-1.5 rounded-2xl flex items-center gap-2 shadow-inner">
                         <div class="pl-3 text-emerald-300">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -46,7 +46,7 @@
                             <span>✉️ Ajukan Surat Online</span>
                             <span class="text-base">&rarr;</span>
                         </a>
-                        <a href="/ppid/dokumen" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 backdrop-blur-md transition">
+                        <a href="{{ route('public.ppid.documents') }}" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 backdrop-blur-md transition">
                             <span>📑 Dokumen Publik (DIP)</span>
                         </a>
                     </div>
@@ -88,7 +88,7 @@
                                 <span class="text-[11px] text-emerald-200 block">Transparansi Anggaran</span>
                                 <span class="text-xs font-bold text-white">APBDes Tahun Anggaran {{ date('Y') }}</span>
                             </div>
-                            <a href="/apbdes" class="text-xs font-bold text-emerald-300 hover:text-white transition flex items-center gap-1">
+                            <a href="{{ route('budgets.index') }}" class="text-xs font-bold text-emerald-300 hover:text-white transition flex items-center gap-1">
                                 Rincian &rarr;
                             </a>
                         </div>
@@ -103,32 +103,32 @@
 <section class="px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
     <div class="max-w-7xl mx-auto">
         <div class="bg-white rounded-2xl shadow-xl shadow-emerald-950/5 border border-emerald-100 p-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            <a href="/citizen/letters/create" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
+            <a href="{{ route('citizen.letters.create') }}" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
                 <span class="text-2xl block mb-1 group-hover:scale-110 transition-transform">✉️</span>
                 <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 block">Layanan Surat</span>
                 <span class="text-[10px] text-slate-500">Ajukan Mandiri</span>
             </a>
-            <a href="/ppid/dokumen" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
+            <a href="{{ route('public.ppid.documents') }}" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
                 <span class="text-2xl block mb-1 group-hover:scale-110 transition-transform">📑</span>
                 <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 block">Dokumen DIP</span>
                 <span class="text-[10px] text-slate-500">Katalog PPID</span>
             </a>
-            <a href="/apbdes" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
+            <a href="{{ route('budgets.index') }}" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
                 <span class="text-2xl block mb-1 group-hover:scale-110 transition-transform">📊</span>
                 <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 block">APBDes</span>
                 <span class="text-[10px] text-slate-500">Transparansi</span>
             </a>
-            <a href="/peta" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
+            <a href="{{ route('map.index') }}" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
                 <span class="text-2xl block mb-1 group-hover:scale-110 transition-transform">🗺️</span>
                 <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 block">Peta Desa</span>
                 <span class="text-[10px] text-slate-500">Peta GIS & Zonasi</span>
             </a>
-            <a href="/galeri" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
+            <a href="{{ route('galleries.index') }}" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
                 <span class="text-2xl block mb-1 group-hover:scale-110 transition-transform">📸</span>
                 <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 block">Potret Desa</span>
                 <span class="text-[10px] text-slate-500">Galeri Kegiatan</span>
             </a>
-            <a href="/ppid/tracking" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
+            <a href="{{ route('public.ppid.tracking') }}" class="p-3 rounded-xl hover:bg-emerald-50 transition text-center group block">
                 <span class="text-2xl block mb-1 group-hover:scale-110 transition-transform">🔍</span>
                 <span class="text-xs font-bold text-slate-800 group-hover:text-emerald-700 block">Lacak Tiket</span>
                 <span class="text-[10px] text-slate-500">Cek Status PPID</span>
@@ -143,15 +143,13 @@
         <!-- Kolom Kiri: Warta Berita & Informasi Utama (8 Kolom) -->
         <div class="lg:col-span-8 space-y-12">
             <!-- Header Section Berita -->
-            <div class="flex items-center justify-between border-b border-emerald-100 pb-4">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 block mb-1">Publikasi Resmi</span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Kabar & Warta Desa</h2>
-                </div>
-                <a href="{{ route('articles.index') }}" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 group">
-                    <span>Lihat Semua</span>
-                    <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-                </a>
+            <div class="border-b border-emerald-100 pb-4">
+                @include('themes.emerald.partials.section-header', [
+                    'eyebrow' => 'Publikasi Resmi',
+                    'title' => 'Kabar & Warta Desa',
+                    'actionUrl' => route('articles.index'),
+                    'actionLabel' => 'Lihat Semua',
+                ])
             </div>
 
             <!-- Articles Feed Grid -->
@@ -188,33 +186,22 @@
                 @if($secondaryArticles->isNotEmpty())
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         @foreach($secondaryArticles as $art)
-                            <article class="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group">
-                                <div class="relative h-44 bg-slate-100 overflow-hidden">
-                                    <img src="{{ $art->cover_image ?: 'https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=600&q=80' }}" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                                </div>
-                                <div class="p-5 flex-1 flex flex-col justify-between">
-                                    <div>
-                                        <span class="text-[11px] text-slate-400 block mb-1">
-                                            📅 {{ optional($art->published_at)->translatedFormat('d M Y') }}
-                                        </span>
-                                        <h4 class="font-bold text-slate-800 text-sm line-clamp-2 group-hover:text-emerald-600 transition mb-2">
-                                            <a href="{{ route('articles.show', $art->slug) }}">
-                                                {{ $art->title }}
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <a href="{{ route('articles.show', $art->slug) }}" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1 pt-2">
-                                        Baca Lengkap &rarr;
-                                    </a>
-                                </div>
-                            </article>
+                            @include('themes.emerald.partials.article-card', [
+                                'article' => $art,
+                                'compact' => true,
+                                'showSummary' => false,
+                                'showReadingTime' => false,
+                                'showAuthor' => false,
+                                'readLabel' => 'Baca Lengkap',
+                            ])
                         @endforeach
                     </div>
                 @endif
             @else
-                <div class="bg-white p-12 rounded-3xl text-center border border-slate-200">
-                    <p class="text-slate-500 text-sm">Belum ada artikel warta yang dipublikasikan.</p>
-                </div>
+                @include('themes.emerald.partials.empty-state', [
+                    'title' => 'Belum ada artikel warta yang dipublikasikan.',
+                    'compact' => true,
+                ])
             @endif
 
             <!-- Banner Transparansi PPID & Informasi Publik -->
@@ -229,7 +216,7 @@
                     </p>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-                    <a href="/ppid" class="px-5 py-3 rounded-xl bg-white text-slate-900 hover:bg-emerald-50 font-bold text-xs transition text-center shadow-md">
+                    <a href="{{ route('public.ppid.index') }}" class="px-5 py-3 rounded-xl bg-white text-slate-900 hover:bg-emerald-50 font-bold text-xs transition text-center shadow-md">
                         Kunjungi PPID &rarr;
                     </a>
                 </div>
@@ -250,21 +237,21 @@
                     Ajukan surat pengantar langsung secara daring dan pantau proses verifikasi dari Ketua RT hingga Kepala Desa.
                 </p>
                 <div class="space-y-2">
-                    <a href="/citizen/letters/create" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 transition text-xs font-semibold text-slate-700 border border-slate-100">
+                    <a href="{{ route('citizen.letters.create') }}" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 transition text-xs font-semibold text-slate-700 border border-slate-100">
                         <span>Surat Keterangan Usaha (SKU)</span>
                         <span class="text-slate-400">&rarr;</span>
                     </a>
-                    <a href="/citizen/letters/create" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 transition text-xs font-semibold text-slate-700 border border-slate-100">
+                    <a href="{{ route('citizen.letters.create') }}" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 transition text-xs font-semibold text-slate-700 border border-slate-100">
                         <span>Surat Keterangan Domisili</span>
                         <span class="text-slate-400">&rarr;</span>
                     </a>
-                    <a href="/citizen/letters/create" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 transition text-xs font-semibold text-slate-700 border border-slate-100">
+                    <a href="{{ route('citizen.letters.create') }}" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 transition text-xs font-semibold text-slate-700 border border-slate-100">
                         <span>Surat Keterangan Tidak Mampu</span>
                         <span class="text-slate-400">&rarr;</span>
                     </a>
                 </div>
                 <div class="mt-4 pt-3 border-t border-slate-100">
-                    <a href="/citizen/letters/create" class="block w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs text-center transition shadow-sm">
+                    <a href="{{ route('citizen.letters.create') }}" class="block w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs text-center transition shadow-sm">
                         Pilih Surat Lainnya &rarr;
                     </a>
                 </div>

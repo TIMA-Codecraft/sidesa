@@ -17,6 +17,8 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/) dan pr
 ### Changed
 
 - Menyeragamkan komponen visual tema `default` (hero, breadcrumbs, kartu, badge, tombol, filter, dan empty state) melalui partial Blade bersama agar tampilan konsisten lintas halaman.
+- Menyeragamkan komponen visual tema `emerald` (hero, breadcrumbs, section header, kartu artikel/dokumen/galeri/statistik, alert, dan empty state), menormalkan palet warna serta padding hero, dan mengganti URL hardcoded dengan named route.
+- Versi tema `default` dan `emerald` dinaikkan ke `1.1.0`.
 - `public/robots.txt` statis diganti dengan endpoint dinamis agar URL sitemap mengikuti domain instalasi desa.
 - Pembaruan namespace dan dependensi untuk AuditEngine 2.0 serta ContentEngine (#672, #674).
 - Peningkatan responsivitas layout admin dengan pengelompokan menu sidebar model flyout (#676).
