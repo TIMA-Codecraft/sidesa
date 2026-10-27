@@ -3,24 +3,17 @@
 @section('title', 'Formulir Pengajuan Keberatan Informasi Publik - PPID Desa')
 
 @section('content')
-<!-- Header Banner -->
-<section class="bg-gradient-to-r from-amber-900 via-orange-900 to-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto">
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-200 border border-amber-400/30 mb-3 space-x-1.5">
-            <span>⚖️</span>
-            <span>Mekanisme Keberatan KIP (UU 14/2008 & Perki 1/2018)</span>
-        </span>
-        <h1 class="text-3xl sm:text-4xl font-black tracking-tight">
-            Pengajuan Keberatan Informasi
-        </h1>
-        <p class="mt-2 text-sm sm:text-base text-amber-100 leading-relaxed">
-            Keberatan diajukan kepada Atasan PPID (Kepala Desa) atas permohonan informasi publik yang ditolak, tidak ditanggapi, atau tidak dipenuhi sebagaimana mestinya.
-        </p>
-    </div>
-</section>
+@include('themes.default.partials.page-hero', [
+    'variant' => 'amber',
+    'eyebrow' => 'Mekanisme Keberatan KIP (UU 14/2008 & Perki 1/2018)',
+    'eyebrowIcon' => '⚖️',
+    'title' => 'Pengajuan Keberatan Informasi',
+    'description' => 'Keberatan diajukan kepada Atasan PPID (Kepala Desa) atas permohonan informasi publik yang ditolak, tidak ditanggapi, atau tidak dipenuhi sebagaimana mestinya.',
+    'container' => 'max-w-4xl',
+])
 
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 sm:p-10 space-y-8">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 sm:p-10 space-y-8">
         <!-- Rujukan Tiket Asal -->
         <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-2">
             <span class="font-bold text-slate-700 block">Rujukan Permohonan Asal:</span>
@@ -32,14 +25,11 @@
         </div>
 
         @if ($errors->any())
-            <div class="p-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl text-xs space-y-1">
-                <div class="font-bold">⚠️ Mohon periksa isian Anda:</div>
-                <ul class="list-disc list-inside space-y-0.5 text-[11px] pt-1">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            @include('themes.default.partials.alert', [
+                'tone' => 'danger',
+                'title' => 'Mohon periksa isian Anda:',
+                'items' => $errors->all(),
+            ])
         @endif
 
         <form action="{{ route('public.ppid.objections.store', $infoRequest->ticket_number) }}" method="POST" class="space-y-6">
@@ -83,7 +73,7 @@
                 <a href="{{ route('public.ppid.tracking.show', $infoRequest->ticket_number) }}" class="text-xs text-slate-500 hover:text-slate-800">
                     &larr; Batal & Kembali
                 </a>
-                <button type="submit" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-xl shadow-md transition text-xs flex items-center space-x-2">
+                <button type="submit" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-xl shadow-md transition text-xs flex items-center gap-2">
                     <span>⚖️</span>
                     <span>Kirim Berkas Keberatan ke Kepala Desa</span>
                 </button>

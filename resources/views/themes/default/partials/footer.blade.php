@@ -35,9 +35,16 @@
             </div>
         </div>
 
-        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
             <p>&copy; {{ date('Y') }} {{ \App\Models\Setting::get('village_name', 'Pemerintah Desa') }}. Hak Cipta Dilindungi.</p>
-            <p class="mt-2 sm:mt-0">Didukung oleh SiDesa</p>
+            <p class="mt-2 sm:mt-0 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+                <span>Didukung oleh SiDesa</span>
+                <span aria-hidden="true" class="text-slate-700">•</span>
+                <span>
+                    Dikembangkan oleh
+                    <a href="https://timacodecraft.com" target="_blank" rel="noopener" class="font-semibold text-slate-300 hover:text-sky-400 transition">TimaCodeCraft</a>
+                </span>
+            </p>
         </div>
     </div>
 </footer>

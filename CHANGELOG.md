@@ -8,6 +8,7 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/) dan pr
 
 ### Added
 
+- Kredit pengembang TimaCodeCraft beserta tautan `timacodecraft.com` pada footer tema publik.
 - Sitemap XML dinamis di `/sitemap.xml` untuk beranda, berita, kategori, halaman statis, galeri, APBDes, peta, dan layanan PPID.
 - `robots.txt` dinamis di `/robots.txt` yang mencantumkan URL sitemap dan memblokir area privat seperti admin, installer, layanan warga, serta verifikasi surat.
 - Invalidasi cache sitemap otomatis saat konten, kategori, APBDes, atau dokumen PPID berubah.
@@ -15,6 +16,7 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/) dan pr
 
 ### Changed
 
+- Menyeragamkan komponen visual tema `default` (hero, breadcrumbs, kartu, badge, tombol, filter, dan empty state) melalui partial Blade bersama agar tampilan konsisten lintas halaman.
 - `public/robots.txt` statis diganti dengan endpoint dinamis agar URL sitemap mengikuti domain instalasi desa.
 - Pembaruan namespace dan dependensi untuk AuditEngine 2.0 serta ContentEngine (#672, #674).
 - Peningkatan responsivitas layout admin dengan pengelompokan menu sidebar model flyout (#676).

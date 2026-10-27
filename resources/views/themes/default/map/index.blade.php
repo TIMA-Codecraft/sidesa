@@ -26,33 +26,24 @@
     }
 </style>
 
-<!-- Header Banner -->
-<section class="bg-gradient-to-r from-sky-950 via-indigo-950 to-slate-950 text-white py-14 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/20 text-sky-200 border border-sky-400/30 mb-3 space-x-1.5">
-            <span>🗺️</span>
-            <span>Geographic Information System (GIS) & Inventarisasi Aset (Permendagri 1/2016)</span>
-        </span>
-        <h1 class="text-3xl sm:text-4xl font-black tracking-tight">
-            Peta Digital & Fasilitas Desa
-        </h1>
-        <p class="mt-2 text-sm sm:text-base text-sky-200 max-w-2xl leading-relaxed">
-            Eksplorasi batas administratif wilayah, pembagian dusun, lokasi persebaran fasilitas publik, serta inventarisasi yuridis aset desa di {{ \App\Models\Setting::get('village_name', 'Desa Sukamaju') }}.
-        </p>
-    </div>
-</section>
+@include('themes.default.partials.page-hero', [
+    'eyebrow' => 'Geographic Information System (GIS) & Inventarisasi Aset (Permendagri 1/2016)',
+    'eyebrowIcon' => '🗺️',
+    'title' => 'Peta Digital & Fasilitas Desa',
+    'description' => 'Eksplorasi batas administratif wilayah, pembagian dusun, lokasi persebaran fasilitas publik, serta inventarisasi yuridis aset desa di ' . \App\Models\Setting::get('village_name', 'Desa Sukamaju') . '.',
+])
 
 <!-- Filter & Map Container -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
     <!-- Category & Asset Filter Bar -->
-    <div class="space-y-3 bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+    <div class="space-y-3 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
         <!-- Filter Kategori Fasilitas -->
         <div class="flex items-center space-x-2 overflow-x-auto pb-1 scrollbar-none" id="categoryFilters">
             <button 
                 type="button" 
                 onclick="filterCategory('all')" 
                 id="btn-cat-all"
-                class="filter-cat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap bg-sky-600 text-white shadow-xs"
+                class="filter-cat-btn active px-3.5 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-sky-600 text-white shadow-sm"
             >
                 🌐 Semua Kategori ({{ $facilities->count() }})
             </button>
@@ -65,7 +56,7 @@
                         type="button" 
                         onclick="filterCategory('{{ $key }}')" 
                         id="btn-cat-{{ $key }}"
-                        class="filter-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
+                        class="filter-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
                     >
                         <span>{{ $cat['icon'] }}</span>
                         <span class="ml-1">{{ $cat['label'] }} ({{ $count }})</span>
@@ -84,7 +75,7 @@
                 type="button" 
                 onclick="filterAsset('all')" 
                 id="btn-asset-all"
-                class="filter-asset-btn active px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-indigo-600 text-white shadow-2xs"
+                class="filter-asset-btn active px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-sky-600 text-white shadow-sm"
             >
                 Semua Titik
             </button>
@@ -92,7 +83,7 @@
                 type="button" 
                 onclick="filterAsset('only_assets')" 
                 id="btn-asset-only_assets"
-                class="filter-asset-btn px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
+                class="filter-asset-btn px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
             >
                 🏛️ Hanya Aset Desa ({{ $facilities->where('is_village_asset', true)->count() }})
             </button>
@@ -105,7 +96,7 @@
                         type="button" 
                         onclick="filterAsset('{{ $kCode }}')" 
                         id="btn-asset-{{ $kCode }}"
-                        class="filter-asset-btn px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
+                        class="filter-asset-btn px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
                     >
                         <span>{{ $kib['icon'] }}</span>
                         <span class="ml-1">{{ $kib['code'] }}: {{ $kib['name'] }} ({{ $kCount }})</span>
@@ -118,7 +109,7 @@
     <!-- Map & Sidebar Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Leaflet Map Container -->
-        <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm relative">
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm relative">
             <div id="villageMap" class="w-full h-[580px] z-10"></div>
             <!-- Legend Overlay -->
             <div class="absolute bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200 shadow-lg text-xs space-y-2 hidden sm:block max-w-[220px]">
@@ -133,7 +124,7 @@
         </div>
 
         <!-- Directory Fasilitas List -->
-        <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm space-y-4 flex flex-col justify-between max-h-[580px]">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4 flex flex-col justify-between max-h-[580px]">
             <div>
                 <h3 class="font-bold text-slate-800 text-sm flex items-center justify-between pb-3 border-b border-slate-100">
                     <span class="flex items-center space-x-1.5">
@@ -160,7 +151,7 @@
                                         {{ $facility->name }}
                                     </h4>
                                     @if($facility->is_village_asset)
-                                        <span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-blue-100 text-blue-700">
+                                        <span class="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-sky-100 text-sky-700">
                                             Aset Desa
                                         </span>
                                     @endif
@@ -197,9 +188,12 @@
                             </div>
                         </div>
                     @empty
-                        <div class="p-8 text-center text-slate-400">
-                            <p class="text-xs">Belum ada titik fasilitas yang tersimpan.</p>
-                        </div>
+                        @include('themes.default.partials.empty-state', [
+                            'icon' => '📍',
+                            'title' => 'Belum ada titik fasilitas',
+                            'description' => 'Belum ada titik fasilitas yang tersimpan.',
+                            'compact' => true,
+                        ])
                     @endforelse
                 </div>
             </div>
@@ -338,11 +332,11 @@
         currentCategoryFilter = category;
 
         document.querySelectorAll('.filter-cat-btn').forEach(btn => {
-            btn.className = 'filter-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200';
+            btn.className = 'filter-cat-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200';
         });
         const activeBtn = document.getElementById('btn-cat-' + category);
         if (activeBtn) {
-            activeBtn.className = 'filter-cat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap bg-sky-600 text-white shadow-xs';
+            activeBtn.className = 'filter-cat-btn active px-3.5 py-1.5 rounded-full text-xs font-bold transition whitespace-nowrap bg-sky-600 text-white shadow-sm';
         }
 
         applyCombinedFilters();
@@ -353,11 +347,11 @@
         currentAssetFilter = assetFilter;
 
         document.querySelectorAll('.filter-asset-btn').forEach(btn => {
-            btn.className = 'filter-asset-btn px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200';
+            btn.className = 'filter-asset-btn px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200';
         });
         const activeBtn = document.getElementById('btn-asset-' + assetFilter);
         if (activeBtn) {
-            activeBtn.className = 'filter-asset-btn active px-3 py-1 rounded-lg text-xs font-semibold transition whitespace-nowrap bg-indigo-600 text-white shadow-2xs';
+            activeBtn.className = 'filter-asset-btn active px-3 py-1 rounded-full text-xs font-semibold transition whitespace-nowrap bg-sky-600 text-white shadow-sm';
         }
 
         applyCombinedFilters();

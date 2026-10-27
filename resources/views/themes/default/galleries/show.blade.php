@@ -3,52 +3,41 @@
 @section('title', $gallery->title . ' - Galeri ' . \App\Models\Setting::get('village_name', 'Desa Sukamaju'))
 
 @section('content')
-<!-- Breadcrumbs & Album Header -->
-<section class="bg-gradient-to-r from-sky-900 to-indigo-950 text-white py-14 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-        <nav class="flex items-center space-x-2 text-xs text-sky-200/80 mb-4 font-medium">
-            <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
-            <span>&rsaquo;</span>
-            <a href="{{ route('galleries.index') }}" class="hover:text-white transition">Galeri Foto</a>
-            <span>&rsaquo;</span>
-            <span class="text-white truncate max-w-xs">{{ $gallery->title }}</span>
-        </nav>
-
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/20 text-sky-200 border border-sky-400/30 mb-3 space-x-1.5">
-            <span>📷</span>
-            <span>Album Dokumentasi</span>
+@component('themes.default.partials.page-hero', [
+    'eyebrow' => 'Album Dokumentasi',
+    'eyebrowIcon' => '📷',
+    'title' => $gallery->title,
+    'breadcrumbs' => [
+        ['label' => 'Beranda', 'url' => route('home')],
+        ['label' => 'Galeri Foto', 'url' => route('galleries.index')],
+        ['label' => $gallery->title],
+    ],
+])
+    <div class="mt-4 flex flex-wrap items-center gap-4 text-xs text-sky-200/90 font-medium">
+        <span class="flex items-center gap-1">
+            <span>📅</span>
+            <span>{{ optional($gallery->published_at)->translatedFormat('d F Y') }}</span>
         </span>
-        <h1 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
-            {{ $gallery->title }}
-        </h1>
-
-        <!-- Meta Info -->
-        <div class="mt-4 flex flex-wrap items-center gap-4 text-xs text-sky-200/90 font-medium">
-            <span class="flex items-center space-x-1">
-                <span>📅</span>
-                <span>{{ optional($gallery->published_at)->translatedFormat('d F Y') }}</span>
-            </span>
-            <span class="flex items-center space-x-1">
-                <span>👤</span>
-                <span>{{ $gallery->author?->name ?? 'Aparatur Desa' }}</span>
-            </span>
-            <span class="flex items-center space-x-1">
-                <span>🖼️</span>
-                <span>{{ $gallery->photos->count() }} Foto dalam album</span>
-            </span>
-            <span class="flex items-center space-x-1">
-                <span>👁️</span>
-                <span>{{ number_format($gallery->view_count) }} kali dilihat</span>
-            </span>
-        </div>
-
-        @if($gallery->summary)
-            <p class="mt-4 text-sm sm:text-base text-sky-100/90 max-w-3xl leading-relaxed">
-                {{ $gallery->summary }}
-            </p>
-        @endif
+        <span class="flex items-center gap-1">
+            <span>👤</span>
+            <span>{{ $gallery->author?->name ?? 'Aparatur Desa' }}</span>
+        </span>
+        <span class="flex items-center gap-1">
+            <span>🖼️</span>
+            <span>{{ $gallery->photos->count() }} Foto dalam album</span>
+        </span>
+        <span class="flex items-center gap-1">
+            <span>👁️</span>
+            <span>{{ number_format($gallery->view_count) }} kali dilihat</span>
+        </span>
     </div>
-</section>
+
+    @if($gallery->summary)
+        <p class="mt-4 text-sm sm:text-base text-sky-100/90 max-w-3xl leading-relaxed">
+            {{ $gallery->summary }}
+        </p>
+    @endif
+@endcomponent
 
 <!-- Main Photo Content & Lightbox Component -->
 <div 
@@ -215,7 +204,7 @@
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($recentGalleries as $item)
-                    <a href="{{ route('galleries.show', $item->slug) }}" class="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                    <a href="{{ route('galleries.show', $item->slug) }}" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
                         <div class="relative h-40 bg-slate-100 overflow-hidden">
                             <img src="{{ $item->cover_image }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                             <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-900/80 text-white">

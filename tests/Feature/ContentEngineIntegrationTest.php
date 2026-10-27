@@ -71,7 +71,7 @@ class ContentEngineIntegrationTest extends TestCase
         $response = $this->get('/berita');
 
         $response->assertStatus(200);
-        $response->assertSee('Kabar & Informasi Terkini', false);
+        $response->assertSee('Kabar & Informasi Terkini');
         $response->assertSee('Penyaluran Bantuan Langsung Tunai (BLT) Dana Desa Triwulan Berjalan Sukses');
         $response->assertSee('Pembangunan Jalan Usaha Tani Dusun Sukamaju Resmi Dimulai');
     }

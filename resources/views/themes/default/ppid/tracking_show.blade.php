@@ -3,42 +3,41 @@
 @section('title', "Status Tiket {$ticket} - PPID Desa")
 
 @section('content')
-<section class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto">
-        <a href="{{ route('public.ppid.tracking') }}" class="inline-flex items-center text-xs text-blue-200 hover:text-white mb-4 space-x-1">
-            <span>&larr; Lacak Tiket Lain</span>
-        </a>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-                <span class="text-xs font-mono text-blue-300 block mb-1">HASIL PELACAKAN TIKET:</span>
-                <h1 class="text-2xl sm:text-3xl font-black font-mono tracking-tight">{{ $ticket }}</h1>
-            </div>
-            <div>
-                @if($objection)
-                    <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold border {{ $objection->status_badge_class }}">
-                        {{ $objection->status_label }}
-                    </span>
-                @else
-                    <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold border {{ $infoRequest->status_badge_class }}">
-                        {{ $infoRequest->status_label }}
-                    </span>
-                @endif
-            </div>
-        </div>
+@component('themes.default.partials.page-hero', [
+    'eyebrow' => 'Hasil Pelacakan Tiket',
+    'title' => $ticket,
+    'titleClass' => 'text-2xl sm:text-3xl font-black font-mono tracking-tight',
+    'container' => 'max-w-4xl',
+    'breadcrumbs' => [
+        ['label' => 'Beranda', 'url' => route('home')],
+        ['label' => 'Lacak Tiket', 'url' => route('public.ppid.tracking')],
+        ['label' => $ticket],
+    ],
+])
+    <div class="mt-4">
+        @if($objection)
+            <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold border {{ $objection->status_badge_class }}">
+                {{ $objection->status_label }}
+            </span>
+        @else
+            <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold border {{ $infoRequest->status_badge_class }}">
+                {{ $infoRequest->status_label }}
+            </span>
+        @endif
     </div>
-</section>
+@endcomponent
 
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
     @if (session('success'))
-        <div class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs flex items-center space-x-2">
-            <span>✅</span>
-            <span>{{ session('success') }}</span>
-        </div>
+        @include('themes.default.partials.alert', [
+            'tone' => 'success',
+            'message' => session('success'),
+        ])
     @endif
 
     <!-- Kartu Informasi Keberatan (Jika Tiket Keberatan atau Permohonan memiliki keberatan) -->
     @if($objection)
-        <div class="bg-white rounded-3xl border border-amber-200 shadow-sm p-6 sm:p-8 space-y-4 bg-amber-50/20">
+        <div class="bg-white rounded-2xl border border-amber-200 shadow-sm p-6 sm:p-8 space-y-4 bg-amber-50/20">
             <div class="flex items-center justify-between">
                 <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
                     ⚖️ Berkas Keberatan Informasi Publik
@@ -74,7 +73,7 @@
     @endif
 
     <!-- Rincian Permohonan Informasi Asal -->
-    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
         <div class="flex items-center justify-between pb-4 border-b border-slate-100">
             <div>
                 <h2 class="text-base font-bold text-slate-800">Rincian Permohonan Informasi</h2>
@@ -119,7 +118,7 @@
                     </div>
                     @if($infoRequest->response_file_path)
                         <div class="pt-2">
-                            <a href="{{ asset('storage/' . $infoRequest->response_file_path) }}" target="_blank" class="inline-flex items-center px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs space-x-1.5 transition shadow-sm">
+                            <a href="{{ asset('storage/' . $infoRequest->response_file_path) }}" target="_blank" class="inline-flex items-center px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs gap-1.5 transition shadow-sm">
                                 <span>⬇️</span>
                                 <span>Unduh Berkas Salinan Informasi</span>
                             </a>
@@ -146,7 +145,7 @@
                     <!-- Tombol Pengajuan Keberatan jika ditolak -->
                     @if(!$infoRequest->objection)
                         <div class="pt-2">
-                            <a href="{{ route('public.ppid.objections.create', $infoRequest->ticket_number) }}" class="inline-flex items-center px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs space-x-1.5 transition shadow-sm">
+                            <a href="{{ route('public.ppid.objections.create', $infoRequest->ticket_number) }}" class="inline-flex items-center px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs gap-1.5 transition shadow-sm">
                                 <span>⚖️</span>
                                 <span>Ajukan Keberatan Informasi kepada Kepala Desa</span>
                             </a>
