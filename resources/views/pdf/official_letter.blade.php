@@ -137,7 +137,7 @@
                 <td style="vertical-align: middle; text-align: center;">
                     <h3>PEMERINTAH KABUPATEN {{ strtoupper($regencyName) }}</h3>
                     <h3>KECAMATAN {{ strtoupper($districtName) }}</h3>
-                    <h2>DESA {{ strtoupper($villageName) }}</h2>
+                    <h2>DESA {{ strtoupper(village_name(withPrefix: false)) }}</h2>
                     <div class="address">
                         {{ $villageAddress }} | Kode Pos: {{ $postalCode }}<br>
                         Telp: {{ $villagePhone }} | Email: {{ $villageEmail }}
@@ -166,7 +166,7 @@
     <div class="signature-block clearfix">
         <div class="sign-box">
             <div class="sign-date">{{ $villageName }}, {{ $dateFormatted }}</div>
-            <div class="sign-role">Kepala Desa {{ $villageName }}</div>
+            <div class="sign-role">Kepala Desa {{ village_name(withPrefix: false) }}</div>
             
             <div class="qr-container">
                 <img src="data:image/svg+xml;base64,{{ $qrBase64 }}" alt="QR Verifikasi TTE">

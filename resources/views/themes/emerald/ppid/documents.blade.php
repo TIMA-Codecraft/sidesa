@@ -1,6 +1,6 @@
 @extends(theme_layout())
 
-@section('title', 'Daftar Dokumen Informasi Publik (DIP) - PPID Desa ' . \App\Models\Setting::get('village_name', 'Desa Sukamaju'))
+@section('title', 'Daftar Dokumen Informasi Publik (DIP) - PPID Desa ' . village_name(withPrefix: false))
 
 @section('content')
 @component('themes.emerald.partials.page-hero', [

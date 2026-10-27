@@ -9,7 +9,7 @@
         ['label' => 'Warta & Kabar Desa', 'url' => $currentCategory ? route('articles.index') : null],
         $currentCategory ? ['label' => $currentCategory->name, 'muted' => true] : null,
     ])),
-    'eyebrow' => 'Warta Resmi & Dokumentasi Desa ' . \App\Models\Setting::get('village_name', 'Sukamaju'),
+    'eyebrow' => 'Warta Resmi & Dokumentasi Desa ' . village_name(withPrefix: false),
     'eyebrowIcon' => '📰',
     'title' => $currentCategory
         ? 'Kategori: ' . $currentCategory->name

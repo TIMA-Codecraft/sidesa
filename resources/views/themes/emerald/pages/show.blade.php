@@ -9,7 +9,7 @@
         ['label' => 'Informasi & Profil', 'muted' => true],
         ['label' => $page->title, 'truncate' => true],
     ],
-    'eyebrow' => 'Dokumentasi Resmi Desa ' . \App\Models\Setting::get('village_name', 'Sukamaju'),
+    'eyebrow' => 'Dokumentasi Resmi Desa ' . village_name(withPrefix: false),
     'eyebrowIcon' => '🏛️',
     'title' => $page->title,
 ])
@@ -66,7 +66,7 @@
 
                 <div class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
                     <span class="font-medium text-emerald-800">
-                        Pemerintah Desa {{ \App\Models\Setting::get('village_name', 'Sukamaju') }}
+                        Pemerintah Desa {{ village_name(withPrefix: false) }}
                     </span>
                     <a href="#top" class="text-emerald-700 hover:text-emerald-800 font-bold inline-flex items-center gap-1">
                         Kembali ke Atas &uarr;

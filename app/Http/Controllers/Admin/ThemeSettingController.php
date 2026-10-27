@@ -24,43 +24,54 @@ class ThemeSettingController extends Controller
         $themesPath = resource_path('views/themes');
         $availableThemes = [];
 
-        // Definisi metadata tema bawaan
-        $themeMeta = [
-            'default' => [
-                'name' => 'Default (Klasik SiDesa)',
-                'description' => 'Tema resmi bawaan SiDesa dengan palet biru langit cerah, navigasi lengkap, dan tata letak responsif.',
-                'author' => 'SiDesa Core Team',
-                'version' => '1.1.0',
-                'screenshot' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-            ],
-            'emerald' => [
-                'name' => 'Emerald Nature',
-                'description' => 'Tema bertema alam bernuansa hijau zamrud asri, cocok untuk desa agrowisata dan pedesaan hijau.',
-                'author' => 'SiDesa Community',
-                'version' => '1.1.0',
-                'screenshot' => 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
-            ],
-        ];
-
         if (File::isDirectory($themesPath)) {
-            $directories = File::directories($themesPath);
-            foreach ($directories as $dir) {
+            foreach (File::directories($themesPath) as $dir) {
                 $folder = basename($dir);
-                $availableThemes[$folder] = $themeMeta[$folder] ?? [
-                    'name' => ucfirst($folder),
-                    'description' => "Tema kustom '{$folder}' dari pihak ketiga.",
-                    'author' => 'Pihak Ketiga',
-                    'version' => '1.0.0',
-                    'screenshot' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
-                ];
+                $availableThemes[$folder] = $this->themeMetadata($folder, $dir);
             }
         }
 
         if (empty($availableThemes)) {
-            $availableThemes['default'] = $themeMeta['default'];
+            $availableThemes['default'] = $this->themeMetadata('default', $themesPath.'/default');
         }
 
         return view('admin.themes.index', compact('availableThemes', 'activeTheme'));
+    }
+
+    /**
+     * Baca metadata tema dari theme.json, lengkapi dengan nilai bawaan.
+     *
+     * @return array{name: string, description: string, author: string, version: string, screenshot: string}
+     */
+    private function themeMetadata(string $folder, string $path): array
+    {
+        $metadata = [
+            'name' => ucfirst($folder),
+            'description' => "Tema kustom '{$folder}' dari pihak ketiga.",
+            'author' => 'Pihak Ketiga',
+            'version' => '1.0.0',
+            'screenshot' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
+        ];
+
+        $manifestPath = $path.'/theme.json';
+
+        if (! File::exists($manifestPath)) {
+            return $metadata;
+        }
+
+        $manifest = json_decode((string) File::get($manifestPath), true);
+
+        if (! is_array($manifest)) {
+            return $metadata;
+        }
+
+        foreach (array_keys($metadata) as $key) {
+            if (isset($manifest[$key]) && is_string($manifest[$key])) {
+                $metadata[$key] = $manifest[$key];
+            }
+        }
+
+        return $metadata;
     }
 
     /**

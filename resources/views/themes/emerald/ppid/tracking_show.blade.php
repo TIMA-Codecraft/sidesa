@@ -1,6 +1,6 @@
 @extends(theme_layout())
 
-@section('title', "Status Tiket {$ticket} - PPID Desa " . \App\Models\Setting::get('village_name', 'Desa Sukamaju'))
+@section('title', "Status Tiket {$ticket} - PPID Desa " . village_name(withPrefix: false))
 
 @section('content')
 @component('themes.emerald.partials.page-hero', [

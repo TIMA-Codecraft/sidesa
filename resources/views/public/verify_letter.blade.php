@@ -15,7 +15,7 @@
             <div class="inline-flex p-3 rounded-2xl bg-white/10 mb-3 backdrop-blur shadow-inner">
                 🏛️
             </div>
-            <h1 class="text-lg font-bold">Pemerintah Desa {{ $villageName }}</h1>
+            <h1 class="text-lg font-bold">Pemerintah Desa {{ village_name(withPrefix: false) }}</h1>
             <p class="text-xs text-slate-300">Kec. {{ $districtName }}, Kab. {{ $regencyName }}</p>
             <div class="mt-2 text-[11px] font-mono tracking-widest text-emerald-300 uppercase">
                 Sistem Verifikasi Dokumen &amp; TTE Tersertifikasi (UU ITE No. 1/2024)

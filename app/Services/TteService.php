@@ -54,12 +54,11 @@ class TteService
         $signatureSecret = (string) Config::get('app.key', 'sidesa-secret-key');
         $signatureHash = hash_hmac('sha256', $documentHash.'|'.$kadesUser->id.'|'.$now->timestamp, $signatureSecret);
 
-        $villageName = (string) Setting::get('village_name', 'Sukamaju');
         $kadesNip = is_array($kadesUser->metadata) && isset($kadesUser->metadata['nip'])
             ? (string) $kadesUser->metadata['nip']
             : '197508152005011002';
         $kadesNik = (string) ($kadesUser->nik ?? ($kadesUser->metadata['nik'] ?? '3201010101750001'));
-        $kadesPosition = 'Kepala Desa '.$villageName;
+        $kadesPosition = 'Kepala Desa '.village_name(withPrefix: false);
 
         // Metadata Sertifikat X.509 dari Balai Sertifikasi Elektronik (BSrE BSSN)
         $issuer = (string) Config::get('tte.bsre.issuer', 'Balai Sertifikasi Elektronik (BSrE) - Badan Siber dan Sandi Negara (BSSN)');

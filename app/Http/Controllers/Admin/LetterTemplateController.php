@@ -123,7 +123,7 @@ class LetterTemplateController extends Controller
         $villageEmail = Setting::get('village_email', 'desa.sukamaju@sidesa.id');
 
         $replacements = [
-            '[NAMA_DESA]' => (string) $villageName,
+            '[NAMA_DESA]' => village_name(withPrefix: false),
             '[NAMA_KECAMATAN]' => (string) $districtName,
             '[NAMA_KABUPATEN]' => (string) $regencyName,
             '[NAMA]' => $sampleResident ? $sampleResident->name : 'Budi Santoso',

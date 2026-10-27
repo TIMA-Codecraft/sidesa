@@ -202,6 +202,18 @@ if (! function_exists('app_name_version')) {
     }
 }
 
+if (! function_exists('village_name')) {
+    /**
+     * Nama desa dari pengaturan; awalan "Desa" dapat dihilangkan agar tidak berulang.
+     */
+    function village_name(bool $withPrefix = true, string $fallback = 'Sukamaju'): string
+    {
+        $name = trim((string) \App\Models\Setting::get('village_name', $fallback));
+
+        return $withPrefix ? $name : trim((string) preg_replace('/^desa\s+/i', '', $name));
+    }
+}
+
 if (! function_exists('village_logo')) {
     /**
      * Mengambil URL logo resmi desa atau null jika belum diunggah.

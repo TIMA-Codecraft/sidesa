@@ -57,7 +57,7 @@
     <!-- Footer Error -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
         <div class="max-w-7xl mx-auto px-4">
-            <p>&copy; {{ date('Y') }} Pemerintah Desa {{ \App\Models\Setting::get('village_name', 'Sukamaju') }}. Sistem Informasi Desa (SiDesa).</p>
+            <p>&copy; {{ date('Y') }} Pemerintah Desa {{ village_name(withPrefix: false) }}. Sistem Informasi Desa (SiDesa).</p>
             <p class="mt-1 text-slate-400">Jika Anda membutuhkan bantuan, hubungi kantor desa melalui telepon {{ \App\Models\Setting::get('village_phone', '-') }} atau email {{ \App\Models\Setting::get('village_email', '-') }}.</p>
         </div>
     </footer>
