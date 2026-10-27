@@ -70,7 +70,7 @@
 
         <!-- Baris Bawah Hak Cipta -->
         <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-400/60 gap-4">
-            <p>&copy; {{ date('Y') }} Pemerintah Desa {{ \App\Models\Setting::get('village_name', 'Sukamaju') }}. Sistem Informasi Desa (SiDesa).</p>
+            <p>&copy; {{ date('Y') }} Pemerintah Desa {{ village_name(withPrefix: false) }}. Sistem Informasi Desa (SiDesa).</p>
             <p class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
                 <span>Inovasi Tata Kelola Desa Mandiri & Terbuka</span>
                 <span aria-hidden="true" class="text-emerald-700">•</span>

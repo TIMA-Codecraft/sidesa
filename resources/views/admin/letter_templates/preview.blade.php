@@ -44,7 +44,7 @@
                 <div class="flex-1 text-center">
                     <h3 class="text-xs sm:text-sm font-bold tracking-wider uppercase m-0">PEMERINTAH KABUPATEN {{ strtoupper($regencyName) }}</h3>
                     <h3 class="text-xs sm:text-sm font-bold tracking-wider uppercase m-0">KECAMATAN {{ strtoupper($districtName) }}</h3>
-                    <h2 class="text-base sm:text-xl font-extrabold tracking-widest uppercase m-0 mt-1">DESA {{ strtoupper($villageName) }}</h2>
+                    <h2 class="text-base sm:text-xl font-extrabold tracking-widest uppercase m-0 mt-1">DESA {{ strtoupper(village_name(withPrefix: false)) }}</h2>
                     <div class="text-[11px] text-slate-600 italic mt-1 font-sans">
                         {{ $villageAddress }} | Kode Pos: {{ $postalCode }} | Telp: {{ $villagePhone }} | Email: {{ $villageEmail }}
                     </div>
@@ -70,7 +70,7 @@
         <div class="mt-10 flex justify-end">
             <div class="w-64 text-center text-xs font-sans">
                 <div>{{ $villageName }}, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
-                <div class="font-bold mt-1 mb-2">Kepala Desa {{ $villageName }}</div>
+                <div class="font-bold mt-1 mb-2">Kepala Desa {{ village_name(withPrefix: false) }}</div>
                 
                 <div class="my-3 p-2 bg-slate-50 border border-slate-200 rounded-xl inline-block">
                     <div class="w-20 h-20 bg-slate-200 text-slate-500 flex items-center justify-center text-[10px] font-mono mx-auto rounded">

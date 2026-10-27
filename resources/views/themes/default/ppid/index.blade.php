@@ -6,7 +6,7 @@
 @component('themes.default.partials.page-hero', [
     'eyebrow' => 'UU No. 14 Tahun 2008 & Perki No. 1 Tahun 2018',
     'eyebrowIcon' => '📢',
-    'title' => 'PPID Desa ' . $ppidProfile['village_name'],
+    'title' => 'PPID Desa ' . village_name(withPrefix: false),
     'description' => 'Pejabat Pengelola Informasi dan Dokumentasi (PPID) Desa hadir untuk menjamin hak masyarakat desa dalam memperoleh informasi publik secara cepat, tepat waktu, dan transparan.',
 ])
     <div class="mt-8 flex flex-wrap gap-3">
@@ -58,7 +58,7 @@
                 "{{ $ppidProfile['maklumat'] }}"
             </blockquote>
             <div class="pt-2 text-xs text-slate-600 flex flex-wrap items-center gap-2">
-                <span>Ditetapkan oleh Pemerintah Desa {{ $ppidProfile['village_name'] }}</span>
+                <span>Ditetapkan oleh Pemerintah Desa {{ village_name(withPrefix: false) }}</span>
                 <span>•</span>
                 <span>Berdasarkan UU KIP No. 14 Tahun 2008</span>
             </div>

@@ -19,12 +19,14 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id/1.1.0/) dan pr
 - Menyeragamkan komponen visual tema `default` (hero, breadcrumbs, kartu, badge, tombol, filter, dan empty state) melalui partial Blade bersama agar tampilan konsisten lintas halaman.
 - Menyeragamkan komponen visual tema `emerald` (hero, breadcrumbs, section header, kartu artikel/dokumen/galeri/statistik, alert, dan empty state), menormalkan palet warna serta padding hero, dan mengganti URL hardcoded dengan named route.
 - Versi tema `default` dan `emerald` dinaikkan ke `1.1.0`.
+- Metadata tema (nama, deskripsi, penulis, versi, dan screenshot) kini dibaca dari `theme.json` di folder masing-masing tema.
 - `public/robots.txt` statis diganti dengan endpoint dinamis agar URL sitemap mengikuti domain instalasi desa.
 - Pembaruan namespace dan dependensi untuk AuditEngine 2.0 serta ContentEngine (#672, #674).
 - Peningkatan responsivitas layout admin dengan pengelompokan menu sidebar model flyout (#676).
 
 ### Fixed
 
+- Duplikasi kata "Desa" saat nama desa yang sudah berawalan "Desa" dirangkai dengan kata "Desa" (misalnya "Dokumentasi Desa Desa Sukamaju") pada halaman publik, footer, PDF, dan template surat.
 - Duplikasi informasi akun pengguna pada navbar admin (#675).
 - Integrasi `RbacManager` pada pengujian setelah perubahan namespace (#673).
 

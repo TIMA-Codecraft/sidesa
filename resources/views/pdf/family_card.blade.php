@@ -239,7 +239,7 @@
     <!-- Kotak Penyangkal Resmi (Legal Disclaimer Sesuai UU Adminduk) -->
     <div class="disclaimer-box">
         <strong>PERHATIAN / PENYANGKAL RESMI (UU No. 24/2013 & Permendagri No. 47/2016):</strong><br>
-        Dokumen ini merupakan <strong>Salinan Biodata Keluarga Register Kependudukan Desa</strong> yang bersumber dari Pangkalan Data Kependudukan Pemerintah Desa {{ $villageName }}. 
+        Dokumen ini merupakan <strong>Salinan Biodata Keluarga Register Kependudukan Desa</strong> yang bersumber dari Pangkalan Data Kependudukan Pemerintah Desa {{ village_name(withPrefix: false) }}. 
         Dokumen ini <u>BUKAN</u> merupakan pengganti Kartu Keluarga Asli bertanda tangan elektronik resmi yang diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil. 
         Dokumen ini sah digunakan untuk keperluan administrasi internal pelayanan desa, verifikasi program perlindungan sosial/bantuan desa, dan registrasi arsip warga.
     </div>
@@ -255,7 +255,7 @@
             </td>
             <td>
                 <div>{{ $villageName }}, {{ $currentDateIndo }}</div>
-                <div><strong>Kepala Desa {{ $villageName }}</strong></div>
+                <div><strong>Kepala Desa {{ village_name(withPrefix: false) }}</strong></div>
                 <div class="signature-space"></div>
                 <div>( <strong>{{ strtoupper($kadesName) }}</strong> )</div>
                 @if($kadesNip)
@@ -270,7 +270,7 @@
         <table style="width: 100%;">
             <tr>
                 <td style="text-align: left;">
-                    SiDesa v2.0 &bull; Register Kependudukan Desa {{ $villageName }} &bull; Terproteksi UU PDP No. 27/2022
+                    SiDesa v2.0 &bull; Register Kependudukan Desa {{ village_name(withPrefix: false) }} &bull; Terproteksi UU PDP No. 27/2022
                 </td>
                 <td style="text-align: right;">
                     Diunduh oleh: <strong>{{ $downloadedByName }}</strong> pada {{ $downloadedAt }}

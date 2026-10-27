@@ -239,7 +239,7 @@ class LetterService
         $family = $resident?->family;
 
         $replacements = [
-            '[NAMA_DESA]' => (string) Setting::get('village_name', 'Sukamaju'),
+            '[NAMA_DESA]' => village_name(withPrefix: false),
             '[NAMA_KECAMATAN]' => (string) (Setting::get('subdistrict_name') ?: Setting::get('district_name', 'Cibinong')),
             '[NAMA_KABUPATEN]' => (string) (Setting::get('district_name') ?: Setting::get('regency_name', 'Bogor')),
             '[NAMA_PROVINSI]' => (string) Setting::get('province_name', 'Jawa Barat'),
